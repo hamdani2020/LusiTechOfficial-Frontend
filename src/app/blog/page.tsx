@@ -172,7 +172,7 @@ export default function BlogPage() {
           <AnimatedSection animation="slideUp" delay={0.2}>
             {posts.length > 0 || featuredPost ? (
               <>
-                <BlogGrid posts={posts} featuredPost={featuredPost} />
+                <BlogGrid posts={posts} featuredPost={featuredPost || undefined} />
                 
                 {/* Pagination */}
                 <BlogPagination
