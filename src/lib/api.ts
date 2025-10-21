@@ -219,7 +219,7 @@ const createApiError = (error: any): ApiError => {
 apiClient.interceptors.request.use(
   (config) => {
     // Add request timestamp for performance monitoring
-    config.metadata = { startTime: new Date() };
+    (config as any).metadata = { startTime: new Date() };
     
     // Add auth token if available (future use)
     if (typeof window !== 'undefined') {
@@ -246,8 +246,8 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     // Calculate request duration
-    const duration = response.config.metadata?.startTime 
-      ? new Date().getTime() - response.config.metadata.startTime.getTime()
+    const duration = (response.config as any).metadata?.startTime 
+      ? new Date().getTime() - (response.config as any).metadata.startTime.getTime()
       : 0;
     
     // Log response in development
@@ -259,8 +259,8 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     // Calculate request duration if available
-    const duration = error.config?.metadata?.startTime 
-      ? new Date().getTime() - error.config.metadata.startTime.getTime()
+    const duration = (error.config as any)?.metadata?.startTime 
+      ? new Date().getTime() - (error.config as any).metadata.startTime.getTime()
       : 0;
     
     // Log error in development
