@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AnimatedSection, SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
+import AnimatedSection, { SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
 
 const MissionVision: React.FC = () => {
   return (

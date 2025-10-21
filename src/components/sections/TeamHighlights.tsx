@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card, Button } from '@/components/ui';
-import { AnimatedSection, SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
+import AnimatedSection, { SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
 import { teamApi, handleApiError } from '@/lib/api';
 import { TeamMember } from '@/lib/types';
 

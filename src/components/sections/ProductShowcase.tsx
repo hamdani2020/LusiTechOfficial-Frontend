@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardTitle, CardDescription, Button } from '@/components/ui';
-import { AnimatedSection, SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
+import AnimatedSection, { SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
 
 const ProductShowcase: React.FC = () => {
   const products = [
