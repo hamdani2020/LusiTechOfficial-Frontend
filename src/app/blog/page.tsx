@@ -12,16 +12,16 @@ import { BlogPost, Tag, PaginatedResponse } from '@/lib/types';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [featuredPost, setFeaturedPost] = useState<BlogPost | null>(null);
+  const [featuredPost, setFeaturedPost] = useState<BlogPost | undefined>(undefined);
   const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   // Pagination states
   const [totalPages, setTotalPages] = useState(1);
   const [hasNext, setHasNext] = useState(false);
@@ -35,33 +35,33 @@ export default function BlogPage() {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response: PaginatedResponse<BlogPost> = await blogApi.getPosts(
         page,
         postsPerPage,
         search || undefined,
         tagFilters.length > 0 ? tagFilters : undefined
       );
-      
+
       setPosts(response.results);
       setTotalCount(response.count);
       setTotalPages(Math.ceil(response.count / postsPerPage));
       setHasNext(!!response.next);
       setHasPrevious(!!response.previous);
-      
+
       // Set featured post (first post on first page with no filters)
       if (page === 1 && !search && tagFilters.length === 0 && response.results.length > 0) {
         setFeaturedPost(response.results[0]);
         setPosts(response.results.slice(1));
       } else {
-        setFeaturedPost(null);
+        setFeaturedPost(undefined);
       }
-      
+
     } catch (err) {
       const apiError = handleApiError(err);
       setError(apiError.message);
       setPosts([]);
-      setFeaturedPost(null);
+      setFeaturedPost(undefined);
     } finally {
       setLoading(false);
     }
@@ -137,7 +137,11 @@ export default function BlogPage() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="ml-3">
@@ -172,8 +176,8 @@ export default function BlogPage() {
           <AnimatedSection animation="slideUp" delay={0.2}>
             {posts.length > 0 || featuredPost ? (
               <>
-                <BlogGrid posts={posts} featuredPost={featuredPost || undefined} />
-                
+                <BlogGrid posts={posts} featuredPost={featuredPost} />
+
                 {/* Pagination */}
                 <BlogPagination
                   currentPage={currentPage}
@@ -187,16 +191,20 @@ export default function BlogPage() {
               <div className="text-center py-16">
                 <div className="max-w-md mx-auto">
                   <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
                   </svg>
                   <h3 className="mt-4 text-lg font-medium text-gray-900">
                     {hasActiveFilters ? 'No articles found' : 'No articles yet'}
                   </h3>
                   <p className="mt-2 text-gray-500">
-                    {hasActiveFilters 
+                    {hasActiveFilters
                       ? 'Try adjusting your search or filter criteria.'
-                      : 'Check back soon for the latest insights on AI technology and innovation.'
-                    }
+                      : 'Check back soon for the latest insights on AI technology and innovation.'}
                   </p>
                   {hasActiveFilters && (
                     <button
