@@ -160,7 +160,7 @@ export default function BlogPage() {
             <p className="text-gray-600">
               {hasActiveFilters ? (
                 <>
-                  Found {totalCount} article{totalCount !== 1 ? 's' : ''} 
+                  Found {totalCount} article{totalCount !== 1 ? 's' : ''}
                   {searchQuery && ` matching "${searchQuery}"`}
                   {selectedTags.length > 0 && ` in selected topics`}
                 </>
