@@ -59,10 +59,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Form handling
-[forms]
-  [forms.contact]
-    name = "Contact Form"
-    action = "/thank-you"
-    method = "POST"
