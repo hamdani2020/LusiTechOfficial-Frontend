@@ -69,7 +69,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: handleApiError(error),
+        message: handleApiError(error).message,
       });
     } finally {
       setIsSubmitting(false);
