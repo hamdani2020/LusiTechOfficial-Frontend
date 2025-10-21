@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui';
-import { AnimatedSection, SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
+import AnimatedSection, { SlideUpSection, FadeInSection } from '@/components/ui/AnimatedSection';
 
 const MarketTraction: React.FC = () => {
   const marketStats = [
