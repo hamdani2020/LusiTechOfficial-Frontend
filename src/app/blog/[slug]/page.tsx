@@ -1,11 +1,16 @@
 import BlogPostClient from './BlogPostClient';
 
 // Required for static export with dynamic routes
-export async function generateStaticParams() {
-  // Return empty array - we'll handle routing client-side
-  // since blog posts come from external API
-  return [];
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  // For static export, we need to provide at least one path
+  // The actual routing will be handled client-side
+  return [
+    { slug: 'example-post' }
+  ];
 }
+
+// Enable dynamic segments for static export
+export const dynamicParams = true;
 
 interface BlogPostPageProps {
   params: {

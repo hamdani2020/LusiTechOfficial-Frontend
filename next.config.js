@@ -4,6 +4,7 @@ const nextConfig = {
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
+  generateBuildId: () => 'build',
   images: {
     unoptimized: true,
     remotePatterns: [
