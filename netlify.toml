@@ -47,11 +47,6 @@
   to = "/"
   status = 301
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
 # SPA fallback for client-side routing
 [[redirects]]
   from = "/*"

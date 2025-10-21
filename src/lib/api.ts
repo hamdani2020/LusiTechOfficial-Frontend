@@ -14,8 +14,8 @@ import {
 } from './types';
 
 // API Configuration
-// Use Next.js API rewrites for seamless proxy to backend
-const API_BASE_URL = '/api';
+// Point directly to backend API for static export
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.lusitech.com/api';
 const DEFAULT_TIMEOUT = 30000;
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
